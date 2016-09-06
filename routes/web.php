@@ -18,16 +18,30 @@ Route::get('/', function () {
 
 Route::get('/authenticate','AuthenticationController@authenticate')->name('authenticate');
 
-/**
- * Route to create a new user 
- */
-
-Route::post('/signup','AuthWoof\\SignupController@createUser')->name('createUser');
 
 
+Route::group(['prefix'=>'api','middleware'],function(){
 
-/** Private Area - protected by JWT token **/
+    /**
+     * Route to create a new user account using email and password
+     */
 
-Route::group(['middleware' => 'jwt.auth'],function(){
-    Route::get('/private-zone','PrivateAreaController@showIndex')->name('showIndex');
+    Route::post('/signup/email','AuthWoof\\SignupController@createUser')->name('createUser');
+
+
+
+
+
+    /**
+     * Private Area - protected by JWT token
+     ***/
+
+    Route::group(['middleware' => 'jwt.auth'],function(){
+        Route::get('/private-zone','PrivateAreaController@showIndex')->name('showIndex');
+    });
+
+
+
 });
+
+

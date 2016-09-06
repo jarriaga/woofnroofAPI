@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\AuthWoof;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Created by PhpStorm.
@@ -11,10 +15,31 @@ namespace App\Http\Controllers\AuthWoof;
 class SignupController extends \App\Http\Controllers\Controller
 {
 
-	public function createUser()
+	public function createUser(Request $request)
 	{
+		//Validate parameters
+		$validator = Validator::make($request->all(), [
+			'email' => 'required|email|max:255|unique:users',
+			'password' => 'required|min:6|confirmed',
+		]);
 
-		return 'user created';
+		//Check if validation fails
+		if($validator->fails()){
+			return response()->json(['error'=>$validator->errors()],Response::HTTP_BAD_REQUEST);
+		}
+
+		//Create new user and return response
+		try{
+			return User::create([
+				'name' => '',
+				'email' => $request->input('email'),
+				'password' => $request->input('password')
+			]);
+		}catch(\Exception $e){
+			// an Error was produced
+			return response()->json(['error'=>'something is wrong'],Response::HTTP_BAD_REQUEST);
+		}
+
 	}
 
 	
