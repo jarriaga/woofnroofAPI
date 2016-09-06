@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AuthWoof;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 /**
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Validator;
 class SignupController extends \App\Http\Controllers\Controller
 {
 
-	public function createUser(Request $request)
+	public function createUserEmail(Request $request)
 	{
 		//Validate parameters
 		$validator = Validator::make($request->all(), [
@@ -33,7 +34,7 @@ class SignupController extends \App\Http\Controllers\Controller
 			return User::create([
 				'name' => '',
 				'email' => $request->input('email'),
-				'password' => $request->input('password')
+				'password' => Hash::make( $request->input('password'))
 			]);
 		}catch(\Exception $e){
 			// an Error was produced

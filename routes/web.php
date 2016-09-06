@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 
@@ -20,15 +20,18 @@ Route::get('/authenticate','AuthenticationController@authenticate')->name('authe
 
 
 
-Route::group(['prefix'=>'api','middleware'],function(){
+Route::group(['prefix'=>'api','middleware'=>'throttle'],function(){
 
     /**
      * Route to create a new user account using email and password
      */
 
-    Route::post('/signup/email','AuthWoof\\SignupController@createUser')->name('createUser');
+    Route::post('/signup/email','AuthWoof\\SignupController@createUserEmail')->name('createUserEmail');
 
-
+    /**
+     * Routes for login via email
+     */
+    Route::post('/login/email','AuthWoof\\LoginController@loginEmail')->name('loginEmail');
 
 
 
