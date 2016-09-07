@@ -40,7 +40,11 @@ Route::group(['prefix'=>'api','middleware'=>'throttle'],function(){
      ***/
 
     Route::group(['middleware' => 'jwt.auth'],function(){
-        Route::get('/private-zone','PrivateAreaController@showIndex')->name('showIndex');
+
+        // PUT to update user's profile
+        Route::put('/profile','Profile\\ProfileController@update')->name('updateProfile');
+        // GET user's profile
+        Route::get('/profile','Profile\\ProfileController@getProfile')->name('getProfile');
     });
 
 
