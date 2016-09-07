@@ -22,6 +22,7 @@ class SignupController extends \App\Http\Controllers\Controller
 		$validator = Validator::make($request->all(), [
 			'email' => 'required|email|max:255|unique:users',
 			'password' => 'required|min:6|confirmed',
+			'mobile'=>'required'
 		]);
 
 		//Check if validation fails
@@ -34,7 +35,8 @@ class SignupController extends \App\Http\Controllers\Controller
 			return User::create([
 				'name' => '',
 				'email' => $request->input('email'),
-				'password' => Hash::make( $request->input('password'))
+				'password' => Hash::make( $request->input('password')),
+				'mobile' => $request->input('mobile')
 			]);
 		}catch(\Exception $e){
 			// an Error was produced
