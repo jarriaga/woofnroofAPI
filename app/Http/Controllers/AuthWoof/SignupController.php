@@ -21,8 +21,7 @@ class SignupController extends \App\Http\Controllers\Controller
 		//Validate parameters
 		$validator = Validator::make($request->all(), [
 			'email' => 'required|email|max:255|unique:users',
-			'password' => 'required|min:6|confirmed',
-			'mobile'=>'required'
+			'password' => 'required|min:6|confirmed'
 		]);
 
 		//Check if validation fails
