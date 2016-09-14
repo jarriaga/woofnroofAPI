@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddNullableMobileUsers extends Migration
+class AddTokenRecoveryUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddNullableMobileUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('mobile',15)->nullable()->change();
+            $table->string('token',15)->nullable();
         });
     }
 
@@ -26,8 +26,8 @@ class AddNullableMobileUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('token');
             //
-            $table->string('mobile',15)->change();
         });
     }
 }

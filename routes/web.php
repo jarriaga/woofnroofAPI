@@ -16,27 +16,24 @@ Route::get('/', function () {
 });
 
 
-Route::get('/authenticate','AuthenticationController@authenticate')->name('authenticate');
-
+Route::get('/reset-password/{token}','ResetPassword\\ResetPasswordController@resetPasswordPage')->name('passwordPage');
 
 
 Route::group(['prefix'=>'api','middleware'=>'throttle'],function(){
 
-    /**
-     * Route to create a new user account using email and password
-     */
-
+    /*** Route to create a new user account using email and password*/
     Route::post('/signup/email','AuthWoof\\SignupController@createUserEmail')->name('createUserEmail');
-
-    /**
-     * Routes for login via email
-     */
+    /*** Route for login via email*/
     Route::post('/login/email','AuthWoof\\LoginController@loginEmail')->name('loginEmail');
+    /** Route for Forgot your password **/
+    Route::post('/forgot-password','AuthWoof\\ForgotPasswordController@createTempToken')->name('forgotPassword');
+
+
 
 
 
     /**
-     * Private Area - protected by JWT token
+     **************************************** Private Area - protected by JWT token
      ***/
 
     Route::group(['middleware' => 'jwt.auth'],function(){
