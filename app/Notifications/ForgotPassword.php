@@ -46,6 +46,7 @@ class ForgotPassword extends Notification
         $url = url('/reset-password/'.$this->user->token);
 
         return (new MailMessage)
+                    ->from('no-reply@woofnroof.com')
                     ->subject('Reset your password')
                     ->greeting('Reset password instructions')
                     ->line('Hi '.$this->user->name.' you recently requested a password reset for your account. To complete the process, click the button below.')
