@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Http\Response;
 
 class LoginController extends Controller
 {
@@ -42,15 +43,19 @@ class LoginController extends Controller
 		try {
 			// attempt to verify the credentials and create a token for the user
 			if (! $token = JWTAuth::attempt($credentials)) {
-				return response()->json(['error' => 'invalid_credentials'], 401);
+				return response()->json(['error' => 'The email or password you entered is incorrect'], 401);
 			}
 		} catch (JWTException $e) {
 			// something went wrong whilst attempting to encode the token
 			return response()->json(['error' => 'could_not_create_token'], 500);
 		}
-
+		$result = compact('token');
+		$user = JWTAuth::toUser($result['token']);
+		$orange = 1;
+		if(!$user->birthday  || !$user->mobile )
+			$orange = 0;
 		// all good so return the token
-		return response()->json(compact('token'));
+		return response()->json(array_merge(compact('token'),['orange-info'=>$orange]));
 	}
 	
 }
