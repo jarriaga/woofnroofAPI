@@ -32,11 +32,11 @@ class ProfileController	extends Controller
 		try{
 			//Save user
 			$user->name			=	$request->input('name',$user->name);
-			$user->facebookId	=	$request->input('facebookId',$user->facebookId);
 			$user->birthday		=	$request->input('birthday',$user->birthday);
 			$user->latitude		=	$request->input('latitude',$user->latitude);
 			$user->longitude	=	$request->input('longitude',$user->longitude);
 			$user->mobile		=	$request->input('mobile',$user->mobile);
+			$user->email		=	$request->input('email',$user->email);
 			$user->save();
 			return response()->json(['success'=>'the profile was updated'],Response::HTTP_OK);
 
