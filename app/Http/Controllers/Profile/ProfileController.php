@@ -54,7 +54,6 @@ class ProfileController	extends Controller
 	public function getProfile(Request $request)
 	{
 		$user = JWTAuth::toUser($request->input('token'));
-
 		if(!$user){
 			return response()->json(['error'=>'The user doesn\'t exist'],Response::HTTP_BAD_REQUEST);
 		}

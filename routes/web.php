@@ -27,7 +27,10 @@ Route::group(['prefix'=>'api','middleware'=>'throttle'],function(){
     Route::post('/login/email','AuthWoof\\LoginController@loginEmail')->name('loginEmail');
     /** Route for Forgot your password **/
     Route::post('/forgot-password','AuthWoof\\ForgotPasswordController@createTempToken')->name('forgotPassword');
-
+    /** Route for login/signup via facebook */
+    Route::post('/login/facebook','AuthWoof\\LoginController@facebookLogin')->name('loginFacebook');
+    /** Route for Login with Token - Refresh token */
+    Route::post('/login/token','AuthWoof\\LoginController@loginToken')->name('loginToken');
 
 
 
