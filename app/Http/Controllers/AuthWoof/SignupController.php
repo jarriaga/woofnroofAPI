@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Created by PhpStorm.
@@ -32,6 +33,7 @@ class SignupController extends \App\Http\Controllers\Controller
 		//Create new user and return response
 		try{
 			return User::create([
+				'uuid'=>Uuid::uuid4()->toString(),
 				'name' => '',
 				'email' => $request->input('email'),
 				'password' => Hash::make( $request->input('password')),
