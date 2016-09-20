@@ -32,11 +32,6 @@ class ProfileController	extends Controller
 		}
 
 
-		$validator = Validator::make($request->only('email'),[ 'email' => 'required|email' ]);
-		if($validator->fails())
-			return response()->json(['error'=>$validator->errors()],Response::HTTP_BAD_REQUEST);
-
-
 		try{
 			//Save user
 			$user->name			=	$request->input('name',$user->name);
@@ -44,7 +39,6 @@ class ProfileController	extends Controller
 			$user->latitude		=	$request->input('latitude',$user->latitude);
 			$user->longitude	=	$request->input('longitude',$user->longitude);
 			$user->mobile		=	$request->input('mobile',$user->mobile);
-			$user->email		=	$request->input('email',$user->email);
 			$user->save();
 			return response()->json(['success'=>'the profile was updated'],Response::HTTP_OK);
 
