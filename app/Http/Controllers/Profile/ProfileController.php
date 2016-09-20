@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ProfileController	extends Controller
@@ -28,6 +30,12 @@ class ProfileController	extends Controller
 		if(!$user){
 			return response()->json(['error'=>'The user doesn\'t exist'],Response::HTTP_BAD_REQUEST);
 		}
+
+
+		$validator = Validator::make($request->only('email'),[ 'email' => 'required|email' ]);
+		if($validator->fails())
+			return response()->json(['error'=>$validator->errors()],Response::HTTP_BAD_REQUEST);
+
 
 		try{
 			//Save user
