@@ -133,7 +133,7 @@ class LoginController extends Controller
 		}
 		$token = JWTAuth::fromUser($user);
 		$orange = 1;
-		if(!$user->birthday  || !$user->mobile )
+		if(!$user->mobile )
 			$orange = 0;
 		return array_merge(compact('token'),['orange-info'=>$orange]);
 	}
