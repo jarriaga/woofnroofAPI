@@ -47,7 +47,6 @@ class LoginController extends Controller
 		if($validator->fails()){
 			return response()->json(['error'=>$validator->errors()],Response::HTTP_BAD_REQUEST);
 		}
-
 		try {
 			// attempt to verify the credentials and create a token for the user
 			if (! $token = JWTAuth::attempt($credentials)) {
@@ -127,7 +126,7 @@ class LoginController extends Controller
 				$user = User::create([
 					'uuid' => Uuid::uuid4()->toString(),
 					'facebookId' => $userFacebookData['id'],
-					'name' => '',
+					'name' => $userFacebookData['name'],
 					'email' => ($userFacebookData['email']) ? $userFacebookData['email'] : null
 				]);
 
@@ -159,9 +158,10 @@ class LoginController extends Controller
 		}
 		//get the user by token
 		$user = JWTAuth::toUser($token);
+
 		//check if the orange screen should be showed up
 		$orange = 1;
-		if(!$user->birthday  || !$user->mobile )
+		if( !$user->mobile )
 			$orange = 0;
 		return response()->json(array_merge(compact('token'),['orange-info'=>$orange]));
 	}

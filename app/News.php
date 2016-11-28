@@ -12,17 +12,19 @@ class News extends Model
 	const EVENT		=	2;
 	const TIPS		=	3;
 
+	const STATUS_ENABLE = 1;
+	const STATUS_DISABLED = 0;
+
 	/**
 	 * Array with icons url
 	 * @var array
 	 */
 	public static $typesIcons = [
-		News::SHOPPING => 'Shopping',
-		News::HEALTH => 'Health',
-		News::EVENT => 'Event',
-		News::TIPS => 'Tip'
+		News::SHOPPING => 'shop-icon.png',
+		News::HEALTH => 'health-icon.png',
+		News::EVENT => 'events-icon.png',
+		News::TIPS => 'tips-icon.png'
 	];
-
 	/**
 	 * Array with the news names
 	 * @var array
@@ -40,7 +42,7 @@ class News extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-		'title','image','thumb','content','type','date','latitude','longitude'
+		'title','image','thumb','content','type','date','latitude','longitude','icon','status'
 	];
 
 }

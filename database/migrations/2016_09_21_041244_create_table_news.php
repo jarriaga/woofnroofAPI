@@ -18,8 +18,10 @@ class CreateTableNews extends Migration
             $table->string('title');
             $table->string('image');
             $table->string('thumb');
+            $table->string('icon');
             $table->text('content');
             $table->smallInteger('type');
+            $table->boolean('status');
             $table->dateTime('date')->nullable();
             $table->double('latitude',10,8)->nullable();
             $table->double('longitude',10,8)->nullable();

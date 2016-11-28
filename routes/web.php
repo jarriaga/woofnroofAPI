@@ -11,6 +11,8 @@
 |
 */
 
+use App\News;
+
 Route::get('/', function () {
     return view('index');
 });
@@ -41,12 +43,33 @@ Route::group(['prefix'=>'api','middleware'=>'throttle'],function(){
 
     Route::group(['middleware' => 'jwt.auth'],function(){
 
-        // PUT to update user's profile
+        /**  PUT to update user's profile **/
         Route::put('/profile','Profile\\ProfileController@update')->name('updateProfile');
-        // GET user's profile
+        /** GET user's profile **/
         Route::get('/profile','Profile\\ProfileController@getProfile')->name('getProfile');
+        /**  GET all news **/
+        Route::get('/news','News\\NewsController@getAllNews')->name('getAllNews');
     });
 
+
+    Route::get('/create-new',function(){
+        $new = new News;
+        $new->title = 'Delicious treats only $3';
+        $new->content = "bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+		bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+		bla bla bla bla bla bla bla bla blabla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+		bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla<br><br><br>
+		bla bla bla bla bla bla bla bla blabla bla bla bla bla bla bla bla blabla bla bla bla bla bla bla bla bla
+		bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla";
+        $new->image = "/images/news/news-1.jpg";
+        $new->thumb = "/images/news/thumb/news-1.jpg";
+        $new->type = News::SHOPPING;
+        $new->icon = "/images/news/icons/".News::$typesIcons[News::SHOPPING];
+        $new->status = News::STATUS_ENABLE;
+        $new->date = \Carbon\Carbon::now()->toDateTimeString();
+        $new->save();
+        return $new;
+    });
 
 
 });
