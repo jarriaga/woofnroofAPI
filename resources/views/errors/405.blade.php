@@ -7,4 +7,4 @@
  */
 
 
-return response()->json(["error"=>"method not allowed"]);
+echo  response()->json(["error"=>"method not allowed"]);
