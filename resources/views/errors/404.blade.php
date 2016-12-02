@@ -7,4 +7,5 @@
  */
 
 
-return response()->json(["error"=>"page not found"]);
+header('Content-Type: application/json');
+echo  json_encode(["error"=>"page not found"]);

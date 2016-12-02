@@ -6,5 +6,5 @@
  * Time: 12:01 AM
  */
 
-
+header('Content-Type: application/json');
 echo  json_encode(["error"=>"method not allowed"]);
