@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\AuthWoof;
+namespace App\Http\Controllers\Authv2;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

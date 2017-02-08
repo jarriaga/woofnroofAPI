@@ -24,15 +24,19 @@ Route::get('/reset-password/{token}','ResetPassword\\ResetPasswordController@res
 Route::group(['prefix'=>'api','middleware'=>'throttle'],function(){
 
     /*** Route to create a new user account using email and password*/
-    Route::post('/signup/email','AuthWoof\\SignupController@createUserEmail')->name('createUserEmail');
+    Route::post('/signup/email','Authv2\\SignupController@createUserEmail')->name('createUserEmail');
+
     /*** Route for login via email*/
-    Route::post('/login/email','AuthWoof\\LoginController@loginEmail')->name('loginEmail');
+    Route::post('/login/email','Authv2\\LoginController@loginEmail')->name('loginEmail');
+
     /** Route for Forgot your password **/
-    Route::post('/forgot-password','AuthWoof\\ForgotPasswordController@createTempToken')->name('forgotPassword');
+    Route::post('/forgot-password','Authv2\\ForgotPasswordController@createTempToken')->name('forgotPassword');
+
     /** Route for login/signup via facebook */
-    Route::post('/login/facebook','AuthWoof\\LoginController@facebookLogin')->name('loginFacebook');
+    Route::post('/login/facebook','Authv2\\LoginController@facebookLogin')->name('loginFacebook');
+
     /** Route for Login with Token - Refresh token */
-    Route::post('/login/token','AuthWoof\\LoginController@loginToken')->name('loginToken');
+    Route::post('/login/token','Authv2\\LoginController@loginToken')->name('loginToken');
 
 
 
@@ -45,8 +49,10 @@ Route::group(['prefix'=>'api','middleware'=>'throttle'],function(){
 
         /**  PUT to update user's profile **/
         Route::put('/profile','Profile\\ProfileController@update')->name('updateProfile');
+
         /** GET user's profile **/
         Route::get('/profile','Profile\\ProfileController@getProfile')->name('getProfile');
+
         /**  GET all news **/
         Route::get('/news','News\\NewsController@getAllNews')->name('getAllNews');
     });

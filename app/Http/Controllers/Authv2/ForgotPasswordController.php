@@ -6,7 +6,7 @@
  * Time: 9:36 PM
  */
 
-namespace App\Http\Controllers\AuthWoof;
+namespace App\Http\Controllers\Authv2;
 
 
 use App\Http\Controllers\Controller;
